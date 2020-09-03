@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expense/transaction.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -64,6 +65,29 @@ class MyHomePage extends StatelessWidget {
               elevation: 5,
             ),
           ),
+          Card(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Add Description'),
+                  ),
+                  TextField(
+                    decoration: InputDecoration(labelText: 'Add Price'),
+                  ),
+                  FlatButton(
+                    onPressed: () {},
+                    child: Text(
+                      'Add Transaction',
+                    ),
+                    textColor: Colors.purple,
+                  )
+                ],
+              ),
+            ),
+          ),
           Column(
             children: transactions
                 .map((tx) => Card(
@@ -82,7 +106,7 @@ class MyHomePage extends StatelessWidget {
                             ),
                             padding: EdgeInsets.all(10),
                             child: Text(
-                              (tx.amount).toString(),
+                              '\$${(tx.amount).toString()}',
                               style: TextStyle(
                                 color: Colors.purple,
                                 fontSize: 20,
@@ -96,12 +120,10 @@ class MyHomePage extends StatelessWidget {
                               Text(
                                 tx.title,
                                 style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold
-                                ),
+                                    fontSize: 16, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                (tx.date).toString(),
+                                DateFormat().format(tx.date),
                                 style: TextStyle(
                                   color: Colors.grey,
                                 ),
